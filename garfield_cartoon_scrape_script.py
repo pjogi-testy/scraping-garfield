@@ -1,57 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 ### scrapnąć wszystkie komiksy garfielda ze strony mirrora. >> 01.iv.23 vB
 # http://pt.jikos.cz/garfield/
-
-
-# In[24]:
-
-
-from bs4 import BeautifulSoup as bs
-import requests
-import re
-  
-# function to extract html document from given url
-def getHTMLdocument(url):
-    # request for HTML document of given url
-    response = requests.get(url)
-    # response will be provided in JSON format
-    return response.text
-
-
-## najpierw trzeba rozpracować strukturę elementów strony
-# assign URL
-url= "http://pt.jikos.cz/garfield/1989/1/"
-  
-# scrape html document
-html_document = getHTMLdocument(url)
-
-##zeby zobaczyć tresc strony zwrócona przez bs:
-#print(html_document)
-  
-# create soap object
-soup = bs(html_document, 'html.parser')
-  
-# # find all the <a> anchor tags  
-# # with "href" attribute starting with "/gar" ,jak garfield
-# for link in soup.find_all('a', 
-#                           attrs={'href': re.compile("^/gar")}):
-#     # display the actual urls
-#     print(link.get('href'))  
-
-# analogicznie: find all the <img> tags  
-# with "src" attribute starting with "http" 
-for link in soup.find_all('img', 
-                          attrs={'src': re.compile("^http")}):
-    # display the actual urls
-    print(link.get('src'))  
-
-
-# In[68]:
 
 
 import urllib.request
@@ -125,15 +76,4 @@ for rocznik in [roczniki[0]]:   #ewentualnie zdefiniować ograniczenie listy np.
     print(i, "# \n")
 print("\n fin as of", i, " files.")
 
-
-# In[70]:
-
-
-#braki:
-'''
-http://picayune.uclick.com/comics/ga/2017/ga171029.jpg
-http://picayune.uclick.com/comics/ga/2019/ga190108.gif
-http://picayune.uclick.com/comics/ga/2019/ga190410.gif
-http://picayune.uclick.com/comics/ga/2020/ga200411.gif
-'''
 
